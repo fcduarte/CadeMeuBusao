@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Gerenciar Linhas</title>
+	<link href="#{facesContext.externalContext.request.contextPath}/css/bootstrap.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div class="topbar-wrapper" style="z-index: 5;">
+		<div class="topbar" data-dropdown="dropdown">
+			<div class="topbar-inner">
+				<div class="container">
+					<h3><a href="#">Cadê Meu Busão?!?!</a></h3>
+					<ul class="nav">
+						<li class="active"><a href="#">Home</a></li>
+						<li><a href="pages/OnibusApplication.jsp">Ônibus</a></li>
+						<li><a href="pages/PontoApplication.jsp">Ônibus</a></li>
+						<li><a href="pages/LocalizacaoApplication.jsp">Localização Atual</a></li>
+						<li><a href="pages/listarLinhas.jsf">Linhas</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<h1>Gerenciar Linhas</h1>
+		<br/>
+		<h:form id="formListarLinhas">
+			<t:dataTable id="tabela" value="#{linhaBean.listaLinhas}" var="linha" class="zebra-striped"
+				rows="#{linhaBean.pageSize}" renderedIfEmpty="true" rowIndexVar="currentRow" first="#{linha.firstRow}">
+				<t:column sortable="false" id="posicaoHeader" columnId="posicaoHeader" >
+					<f:facet name="header"><h:outputText value="#"/></f:facet>
+					<h:outputText id="posicao" value="#{currentRow + 1}"/>
+				</t:column>
+				<t:column sortable="true" id="numero" columnId="numero">
+					<f:facet name="header"><h:outputText value="Número"/></f:facet>
+					<h:outputText id="linhaNumero" value="#{linha.numero}"/>
+				</t:column>
+				<t:column sortable="true" id="descricao" columnId="descricao">
+					<f:facet name="header"><h:outputText value="Descrição"/></f:facet>
+					<h:outputText id="linhaDescricao" value="#{linha.descricao}" />
+				</t:column>
+				<t:column sortable="false" id="editar" columnId="editar">
+					<f:facet name="header"><h:outputText value=""/></f:facet>					
+					<h:commandLink id="editarLinha"  
+							action="#" 
+							value="editar"
+							title="editar">
+						<f:setPropertyActionListener value="#{currentRow}" target="#{linhaBean.rowIndex}"/>
+					</h:commandLink>
+				</t:column>
+			</t:dataTable>
+			<t:dataScroller id="scroll" for="tabela" paginator="true" renderFacetsIfSinglePage="false" paginatorMaxPages="5"
+				paginatorRenderLinkForActive="false">
+				<f:facet name="first">
+					<h:outputText value="Primeira" />
+				</f:facet>
+				<f:facet name="previous">
+					<h:outputText value="Anterior" />
+				</f:facet>
+				<f:facet name="next">
+					<h:outputText value="Próxima" />
+				</f:facet>
+				<f:facet name="last">
+					<h:outputText value="Última" />
+				</f:facet>
+			</t:dataScroller>
+			<br/>
+			<div class="well">
+				<h:commandButton class="btn primary" id="btnNovo" value="Nova Linha" action="#{linhaBean.novaLinha}" />
+				<h:outputText value="&#160;" />
+				<h:commandButton class="btn" id="btnVolta" value="Voltar" action="#{linhaBean.novaLinha}" />
+			</div>			
+		</h:form>
+	</div>
+</body>
+
+</html>

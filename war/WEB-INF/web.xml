@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<servlet>
+		<servlet-name>LinhaServlet</servlet-name>
+		<servlet-class>br.com.cademeubusao.servlet.LinhaServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>PontoDeOnibusServlet</servlet-name>
+		<servlet-class>br.com.cademeubusao.servlet.PontoDeOnibusServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>OnibusServlet</servlet-name>
+		<servlet-class>br.com.cademeubusao.servlet.OnibusServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LinhaServlet</servlet-name>
+		<url-pattern>/cademeubusao/linha</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PontoDeOnibusServlet</servlet-name>
+		<url-pattern>/cademeubusao/pontoDeOnibus</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>OnibusServlet</servlet-name>
+		<url-pattern>/cademeubusao/onibus</url-pattern>
+	</servlet-mapping>
+	<welcome-file-list>
+<!-- 		<welcome-file>index.html</welcome-file> -->
+<!-- 		<welcome-file>index.xhtml</welcome-file> -->
+		<welcome-file>index.jsf</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>br.com.cademeubusao.service</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- We need to set annotation lifecycle provider manually as org.apache.myfaces.config.annotation.NoInjectionAnnotationLifecycleProvider. 
+		Other providers use some classes that are restricted on Google App Engine. -->
+	<context-param>
+		<param-name>org.apache.myfaces.config.annotation.LifecycleProvider</param-name>
+		<param-value>org.apache.myfaces.config.annotation.NoInjectionAnnotationLifecycleProvider</param-value>
+	</context-param>
+
+	<!-- Need to set a secret to avoid javax.crypto.BadPaddingException. "param-value" 
+		must be Base64 encoded. More details: http://wiki.apache.org/myfaces/Secure_Your_Application -->
+	<context-param>
+		<param-name>org.apache.myfaces.SECRET</param-name>
+		<param-value>NzY1NDMyMTA=</param-value>
+	</context-param>
+
+	<!-- Facelets configuration fragment -->
+	<context-param>
+		<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+</web-app>
