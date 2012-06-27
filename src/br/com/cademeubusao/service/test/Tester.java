@@ -39,6 +39,9 @@ public class Tester {
 		
 	}
 	
+	/**
+	 * @return
+	 */
 	private static URI getBaseURI() {
 		return UriBuilder.fromUri(APP_LOCAL).build();
 	}
