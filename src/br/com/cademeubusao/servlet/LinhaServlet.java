@@ -13,6 +13,9 @@ import br.com.cademeubusao.entidade.Linha;
 @SuppressWarnings("serial")
 public class LinhaServlet extends HttpServlet {
 	
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		Linha linha = new Linha();
