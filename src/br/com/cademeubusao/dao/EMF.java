@@ -18,6 +18,12 @@ public final class EMF {
         return emfInstance;
     }
     
+	/**
+	 * @param em
+	 * @param namedQuery
+	 * @param parameters
+	 * @return
+	 */
 	public static List<?> executarNamedQuery(EntityManager em, String namedQuery, Object... parameters) {
 		Query query = prepareQuery(em, namedQuery, 0, 0, parameters);
 		return query.getResultList();
