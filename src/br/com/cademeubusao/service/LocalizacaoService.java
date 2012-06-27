@@ -36,6 +36,15 @@ public class LocalizacaoService {
 	
 	private static final Logger log = Logger.getLogger(LocalizacaoService.class.getName());
 
+	/**
+	 * Javadoc
+	 * @param placa
+	 * @param latitude
+	 * @param longitude
+	 * @param data
+	 * @param servletResponse
+	 * @throws IOException
+	 */
 	@POST
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
